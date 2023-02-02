@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/reactar/static/css/main.72d13a2e.css",
+    "main.js": "/reactar/static/js/main.f95fddc4.js",
+    "index.html": "/reactar/index.html",
+    "main.72d13a2e.css.map": "/reactar/static/css/main.72d13a2e.css.map",
+    "main.f95fddc4.js.map": "/reactar/static/js/main.f95fddc4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.72d13a2e.css",
+    "static/js/main.f95fddc4.js"
+  ]
+}
