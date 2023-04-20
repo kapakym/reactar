@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/kapakym/reactar/static/css/main.f6be34af.css",
-    "main.js": "/kapakym/reactar/static/js/main.b28635dd.js",
-    "index.html": "/kapakym/reactar/index.html",
-    "main.f6be34af.css.map": "/kapakym/reactar/static/css/main.f6be34af.css.map",
-    "main.b28635dd.js.map": "/kapakym/reactar/static/js/main.b28635dd.js.map"
+    "main.css": "/reactar/static/css/main.f6be34af.css",
+    "main.js": "/reactar/static/js/main.b28635dd.js",
+    "index.html": "/reactar/index.html",
+    "main.f6be34af.css.map": "/reactar/static/css/main.f6be34af.css.map",
+    "main.b28635dd.js.map": "/reactar/static/js/main.b28635dd.js.map"
   },
   "entrypoints": [
     "static/css/main.f6be34af.css",
