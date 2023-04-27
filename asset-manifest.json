@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/reactar/static/css/main.6d275f06.css",
-    "main.js": "/reactar/static/js/main.d5a0914b.js",
+    "main.js": "/reactar/static/js/main.9ae55174.js",
     "index.html": "/reactar/index.html",
     "main.6d275f06.css.map": "/reactar/static/css/main.6d275f06.css.map",
-    "main.d5a0914b.js.map": "/reactar/static/js/main.d5a0914b.js.map"
+    "main.9ae55174.js.map": "/reactar/static/js/main.9ae55174.js.map"
   },
   "entrypoints": [
     "static/css/main.6d275f06.css",
-    "static/js/main.d5a0914b.js"
+    "static/js/main.9ae55174.js"
   ]
 }
