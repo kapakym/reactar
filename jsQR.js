@@ -107,8 +107,11 @@ exports.BitMatrix = BitMatrix;
 
 "use strict";
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var GenericGFPoly_1 = __webpack_require__(2);
+var GenericGFPoly_1 = __importDefault(__webpack_require__(2));
 function addOrSubtractGF(a, b) {
     return a ^ b; // tslint:disable-line:no-bitwise
 }
@@ -8141,9 +8144,19 @@ exports.shiftJISTable = {
 
 "use strict";
 
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var GenericGF_1 = __webpack_require__(1);
-var GenericGFPoly_1 = __webpack_require__(2);
+var GenericGF_1 = __importStar(__webpack_require__(1));
+var GenericGFPoly_1 = __importDefault(__webpack_require__(2));
 function runEuclideanAlgorithm(field, a, b, R) {
     var _a;
     // Assume a's degree is >= b's
