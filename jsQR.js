@@ -66,11 +66,10 @@ exports["jsQR"] =
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BitMatrix; });
 var BitMatrix = /** @class */ (function () {
     function BitMatrix(data, width) {
         this.width = width;
@@ -98,24 +97,20 @@ var BitMatrix = /** @class */ (function () {
     };
     return BitMatrix;
 }());
-exports.BitMatrix = BitMatrix;
+
 
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = addOrSubtractGF;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GenericGFPoly__ = __webpack_require__(2);
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var GenericGFPoly_1 = __importDefault(__webpack_require__(2));
 function addOrSubtractGF(a, b) {
     return a ^ b; // tslint:disable-line:no-bitwise
 }
-exports.addOrSubtractGF = addOrSubtractGF;
 var GenericGF = /** @class */ (function () {
     function GenericGF(primitive, size, genBase) {
         this.primitive = primitive;
@@ -134,8 +129,8 @@ var GenericGF = /** @class */ (function () {
         for (var i = 0; i < this.size - 1; i++) {
             this.logTable[this.expTable[i]] = i;
         }
-        this.zero = new GenericGFPoly_1.default(this, Uint8ClampedArray.from([0]));
-        this.one = new GenericGFPoly_1.default(this, Uint8ClampedArray.from([1]));
+        this.zero = new __WEBPACK_IMPORTED_MODULE_0__GenericGFPoly__["a" /* default */](this, Uint8ClampedArray.from([0]));
+        this.one = new __WEBPACK_IMPORTED_MODULE_0__GenericGFPoly__["a" /* default */](this, Uint8ClampedArray.from([1]));
     }
     GenericGF.prototype.multiply = function (a, b) {
         if (a === 0 || b === 0) {
@@ -158,7 +153,7 @@ var GenericGF = /** @class */ (function () {
         }
         var coefficients = new Uint8ClampedArray(degree + 1);
         coefficients[0] = coefficient;
-        return new GenericGFPoly_1.default(this, coefficients);
+        return new __WEBPACK_IMPORTED_MODULE_0__GenericGFPoly__["a" /* default */](this, coefficients);
     };
     GenericGF.prototype.log = function (a) {
         if (a === 0) {
@@ -171,17 +166,16 @@ var GenericGF = /** @class */ (function () {
     };
     return GenericGF;
 }());
-exports.default = GenericGF;
+/* harmony default export */ __webpack_exports__["b"] = (GenericGF);
 
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GenericGF__ = __webpack_require__(1);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var GenericGF_1 = __webpack_require__(1);
 var GenericGFPoly = /** @class */ (function () {
     function GenericGFPoly(field, coefficients) {
         if (coefficients.length === 0) {
@@ -237,7 +231,7 @@ var GenericGFPoly = /** @class */ (function () {
             sumDiff[i] = largerCoefficients[i];
         }
         for (var i = lengthDiff; i < largerCoefficients.length; i++) {
-            sumDiff[i] = GenericGF_1.addOrSubtractGF(smallerCoefficients[i - lengthDiff], largerCoefficients[i]);
+            sumDiff[i] = Object(__WEBPACK_IMPORTED_MODULE_0__GenericGF__["a" /* addOrSubtractGF */])(smallerCoefficients[i - lengthDiff], largerCoefficients[i]);
         }
         return new GenericGFPoly(this.field, sumDiff);
     };
@@ -267,7 +261,7 @@ var GenericGFPoly = /** @class */ (function () {
         for (var i = 0; i < aLength; i++) {
             var aCoeff = aCoefficients[i];
             for (var j = 0; j < bLength; j++) {
-                product[i + j] = GenericGF_1.addOrSubtractGF(product[i + j], this.field.multiply(aCoeff, bCoefficients[j]));
+                product[i + j] = Object(__WEBPACK_IMPORTED_MODULE_0__GenericGF__["a" /* addOrSubtractGF */])(product[i + j], this.field.multiply(aCoeff, bCoefficients[j]));
             }
         }
         return new GenericGFPoly(this.field, product);
@@ -296,41 +290,44 @@ var GenericGFPoly = /** @class */ (function () {
         if (a === 1) {
             // Just the sum of the coefficients
             this.coefficients.forEach(function (coefficient) {
-                result = GenericGF_1.addOrSubtractGF(result, coefficient);
+                result = Object(__WEBPACK_IMPORTED_MODULE_0__GenericGF__["a" /* addOrSubtractGF */])(result, coefficient);
             });
             return result;
         }
         result = this.coefficients[0];
         for (var i = 1; i < size; i++) {
-            result = GenericGF_1.addOrSubtractGF(this.field.multiply(a, result), this.coefficients[i]);
+            result = Object(__WEBPACK_IMPORTED_MODULE_0__GenericGF__["a" /* addOrSubtractGF */])(this.field.multiply(a, result), this.coefficients[i]);
         }
         return result;
     };
     return GenericGFPoly;
 }());
-exports.default = GenericGFPoly;
+/* harmony default export */ __webpack_exports__["a"] = (GenericGFPoly);
 
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__binarizer__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__decoder_decoder__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__extractor__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__locator__ = __webpack_require__(12);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var binarizer_1 = __webpack_require__(4);
-var decoder_1 = __webpack_require__(5);
-var extractor_1 = __webpack_require__(11);
-var locator_1 = __webpack_require__(12);
+
+
+
 function scan(matrix) {
-    var locations = locator_1.locate(matrix);
+    var locations = Object(__WEBPACK_IMPORTED_MODULE_3__locator__["a" /* locate */])(matrix);
     if (!locations) {
         return null;
     }
     for (var _i = 0, locations_1 = locations; _i < locations_1.length; _i++) {
         var location_1 = locations_1[_i];
-        var extracted = extractor_1.extract(matrix, location_1);
-        var decoded = decoder_1.decode(extracted.matrix);
+        var extracted = Object(__WEBPACK_IMPORTED_MODULE_2__extractor__["a" /* extract */])(matrix, location_1);
+        var decoded = Object(__WEBPACK_IMPORTED_MODULE_1__decoder_decoder__["a" /* decode */])(extracted.matrix);
         if (decoded) {
             return {
                 binaryData: decoded.bytes,
@@ -363,7 +360,7 @@ function jsQR(data, width, height, providedOptions) {
     });
     var shouldInvert = options.inversionAttempts === "attemptBoth" || options.inversionAttempts === "invertFirst";
     var tryInvertedFirst = options.inversionAttempts === "onlyInvert" || options.inversionAttempts === "invertFirst";
-    var _a = binarizer_1.binarize(data, width, height, shouldInvert), binarized = _a.binarized, inverted = _a.inverted;
+    var _a = Object(__WEBPACK_IMPORTED_MODULE_0__binarizer__["a" /* binarize */])(data, width, height, shouldInvert), binarized = _a.binarized, inverted = _a.inverted;
     var result = scan(tryInvertedFirst ? inverted : binarized);
     if (!result && (options.inversionAttempts === "attemptBoth" || options.inversionAttempts === "invertFirst")) {
         result = scan(tryInvertedFirst ? binarized : inverted);
@@ -371,17 +368,17 @@ function jsQR(data, width, height, providedOptions) {
     return result;
 }
 jsQR.default = jsQR;
-exports.default = jsQR;
+/* harmony default export */ __webpack_exports__["default"] = (jsQR);
 
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = binarize;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BitMatrix__ = __webpack_require__(0);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var BitMatrix_1 = __webpack_require__(0);
 var REGION_SIZE = 8;
 var MIN_DYNAMIC_RANGE = 24;
 function numBetween(value, min, max) {
@@ -457,10 +454,10 @@ function binarize(data, width, height, returnInverted) {
             blackPoints.set(hortizontalRegion, verticalRegion, average);
         }
     }
-    var binarized = BitMatrix_1.BitMatrix.createEmpty(width, height);
+    var binarized = __WEBPACK_IMPORTED_MODULE_0__BitMatrix__["a" /* BitMatrix */].createEmpty(width, height);
     var inverted = null;
     if (returnInverted) {
-        inverted = BitMatrix_1.BitMatrix.createEmpty(width, height);
+        inverted = __WEBPACK_IMPORTED_MODULE_0__BitMatrix__["a" /* BitMatrix */].createEmpty(width, height);
     }
     for (var verticalRegion = 0; verticalRegion < verticalRegionCount; verticalRegion++) {
         for (var hortizontalRegion = 0; hortizontalRegion < horizontalRegionCount; hortizontalRegion++) {
@@ -491,20 +488,22 @@ function binarize(data, width, height, returnInverted) {
     }
     return { binarized: binarized };
 }
-exports.binarize = binarize;
 
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = decode;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BitMatrix__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__decodeData__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reedsolomon__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__version__ = __webpack_require__(10);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var BitMatrix_1 = __webpack_require__(0);
-var decodeData_1 = __webpack_require__(6);
-var reedsolomon_1 = __webpack_require__(9);
-var version_1 = __webpack_require__(10);
+
+
+
 // tslint:disable:no-bitwise
 function numBitsDiffering(x, y) {
     var z = x ^ y;
@@ -565,7 +564,7 @@ var DATA_MASKS = [
 ];
 function buildFunctionPatternMask(version) {
     var dimension = 17 + 4 * version.versionNumber;
-    var matrix = BitMatrix_1.BitMatrix.createEmpty(dimension, dimension);
+    var matrix = __WEBPACK_IMPORTED_MODULE_0__BitMatrix__["a" /* BitMatrix */].createEmpty(dimension, dimension);
     matrix.setRegion(0, 0, 9, 9, true); // Top left finder pattern + separator + format
     matrix.setRegion(dimension - 8, 0, 8, 9, true); // Top right finder pattern + separator + format
     matrix.setRegion(0, dimension - 8, 9, 8, true); // Bottom left finder pattern + separator + format
@@ -627,7 +626,7 @@ function readVersion(matrix) {
     var dimension = matrix.height;
     var provisionalVersion = Math.floor((dimension - 17) / 4);
     if (provisionalVersion <= 6) { // 6 and under dont have version info in the QR code
-        return version_1.VERSIONS[provisionalVersion - 1];
+        return __WEBPACK_IMPORTED_MODULE_3__version__["a" /* VERSIONS */][provisionalVersion - 1];
     }
     var topRightVersionBits = 0;
     for (var y = 5; y >= 0; y--) {
@@ -643,7 +642,7 @@ function readVersion(matrix) {
     }
     var bestDifference = Infinity;
     var bestVersion;
-    for (var _i = 0, VERSIONS_1 = version_1.VERSIONS; _i < VERSIONS_1.length; _i++) {
+    for (var _i = 0, VERSIONS_1 = __WEBPACK_IMPORTED_MODULE_3__version__["a" /* VERSIONS */]; _i < VERSIONS_1.length; _i++) {
         var version = VERSIONS_1[_i];
         if (version.infoBits === topRightVersionBits || version.infoBits === bottomLeftVersionBits) {
             return version;
@@ -773,7 +772,7 @@ function decodeMatrix(matrix) {
     var resultIndex = 0;
     for (var _i = 0, dataBlocks_3 = dataBlocks; _i < dataBlocks_3.length; _i++) {
         var dataBlock = dataBlocks_3[_i];
-        var correctedBytes = reedsolomon_1.decode(dataBlock.codewords, dataBlock.codewords.length - dataBlock.numDataCodewords);
+        var correctedBytes = Object(__WEBPACK_IMPORTED_MODULE_2__reedsolomon__["a" /* decode */])(dataBlock.codewords, dataBlock.codewords.length - dataBlock.numDataCodewords);
         if (!correctedBytes) {
             return null;
         }
@@ -782,7 +781,7 @@ function decodeMatrix(matrix) {
         }
     }
     try {
-        return decodeData_1.decode(resultBytes, version.versionNumber);
+        return Object(__WEBPACK_IMPORTED_MODULE_1__decodeData__["a" /* decode */])(resultBytes, version.versionNumber);
     }
     catch (_a) {
         return null;
@@ -807,19 +806,20 @@ function decode(matrix) {
     }
     return decodeMatrix(matrix);
 }
-exports.decode = decode;
 
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
+/* unused harmony export Mode */
+/* harmony export (immutable) */ __webpack_exports__["a"] = decode;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BitStream__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shiftJISTable__ = __webpack_require__(8);
 // tslint:disable:no-bitwise
-var BitStream_1 = __webpack_require__(7);
-var shiftJISTable_1 = __webpack_require__(8);
+
+
 var Mode;
 (function (Mode) {
     Mode["Numeric"] = "numeric";
@@ -827,7 +827,7 @@ var Mode;
     Mode["Byte"] = "byte";
     Mode["Kanji"] = "kanji";
     Mode["ECI"] = "eci";
-})(Mode = exports.Mode || (exports.Mode = {}));
+})(Mode || (Mode = {}));
 var ModeByte;
 (function (ModeByte) {
     ModeByte[ModeByte["Terminator"] = 0] = "Terminator";
@@ -938,13 +938,13 @@ function decodeKanji(stream, size) {
             c += 0xC140;
         }
         bytes.push(c >> 8, c & 0xFF);
-        text += String.fromCharCode(shiftJISTable_1.shiftJISTable[c]);
+        text += String.fromCharCode(__WEBPACK_IMPORTED_MODULE_1__shiftJISTable__["a" /* shiftJISTable */][c]);
     }
     return { bytes: bytes, text: text };
 }
 function decode(data, version) {
     var _a, _b, _c, _d;
-    var stream = new BitStream_1.BitStream(data);
+    var stream = new __WEBPACK_IMPORTED_MODULE_0__BitStream__["a" /* BitStream */](data);
     // There are 3 'sizes' based on the version. 1-9 is small (0), 10-26 is medium (1) and 27-40 is large (2).
     var size = version <= 9 ? 0 : version <= 26 ? 1 : 2;
     var result = {
@@ -1029,17 +1029,15 @@ function decode(data, version) {
         return result;
     }
 }
-exports.decode = decode;
 
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BitStream; });
 // tslint:disable:no-bitwise
-Object.defineProperty(exports, "__esModule", { value: true });
 var BitStream = /** @class */ (function () {
     function BitStream(bytes) {
         this.byteOffset = 0;
@@ -1087,17 +1085,16 @@ var BitStream = /** @class */ (function () {
     };
     return BitStream;
 }());
-exports.BitStream = BitStream;
+
 
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.shiftJISTable = {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return shiftJISTable; });
+var shiftJISTable = {
     0x20: 0x0020,
     0x21: 0x0021,
     0x22: 0x0022,
@@ -8140,23 +8137,14 @@ exports.shiftJISTable = {
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = decode;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GenericGF__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__GenericGFPoly__ = __webpack_require__(2);
 
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var GenericGF_1 = __importStar(__webpack_require__(1));
-var GenericGFPoly_1 = __importDefault(__webpack_require__(2));
+
 function runEuclideanAlgorithm(field, a, b, R) {
     var _a;
     // Assume a's degree is >= b's
@@ -8228,7 +8216,7 @@ function findErrorMagnitudes(field, errorEvaluator, errorLocations) {
         var denominator = 1;
         for (var j = 0; j < s; j++) {
             if (i !== j) {
-                denominator = field.multiply(denominator, GenericGF_1.addOrSubtractGF(1, field.multiply(errorLocations[j], xiInverse)));
+                denominator = field.multiply(denominator, Object(__WEBPACK_IMPORTED_MODULE_0__GenericGF__["a" /* addOrSubtractGF */])(1, field.multiply(errorLocations[j], xiInverse)));
             }
         }
         result[i] = field.multiply(errorEvaluator.evaluateAt(xiInverse), field.inverse(denominator));
@@ -8241,8 +8229,8 @@ function findErrorMagnitudes(field, errorEvaluator, errorLocations) {
 function decode(bytes, twoS) {
     var outputBytes = new Uint8ClampedArray(bytes.length);
     outputBytes.set(bytes);
-    var field = new GenericGF_1.default(0x011D, 256, 0); // x^8 + x^4 + x^3 + x^2 + 1
-    var poly = new GenericGFPoly_1.default(field, outputBytes);
+    var field = new __WEBPACK_IMPORTED_MODULE_0__GenericGF__["b" /* default */](0x011D, 256, 0); // x^8 + x^4 + x^3 + x^2 + 1
+    var poly = new __WEBPACK_IMPORTED_MODULE_1__GenericGFPoly__["a" /* default */](field, outputBytes);
     var syndromeCoefficients = new Uint8ClampedArray(twoS);
     var error = false;
     for (var s = 0; s < twoS; s++) {
@@ -8255,7 +8243,7 @@ function decode(bytes, twoS) {
     if (!error) {
         return outputBytes;
     }
-    var syndrome = new GenericGFPoly_1.default(field, syndromeCoefficients);
+    var syndrome = new __WEBPACK_IMPORTED_MODULE_1__GenericGFPoly__["a" /* default */](field, syndromeCoefficients);
     var sigmaOmega = runEuclideanAlgorithm(field, field.buildMonomial(twoS, 1), syndrome, twoS);
     if (sigmaOmega === null) {
         return null;
@@ -8270,21 +8258,19 @@ function decode(bytes, twoS) {
         if (position < 0) {
             return null;
         }
-        outputBytes[position] = GenericGF_1.addOrSubtractGF(outputBytes[position], errorMagnitudes[i]);
+        outputBytes[position] = Object(__WEBPACK_IMPORTED_MODULE_0__GenericGF__["a" /* addOrSubtractGF */])(outputBytes[position], errorMagnitudes[i]);
     }
     return outputBytes;
 }
-exports.decode = decode;
 
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.VERSIONS = [
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VERSIONS; });
+var VERSIONS = [
     {
         infoBits: null,
         versionNumber: 1,
@@ -9594,12 +9580,12 @@ exports.VERSIONS = [
 
 /***/ }),
 /* 11 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = extract;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BitMatrix__ = __webpack_require__(0);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var BitMatrix_1 = __webpack_require__(0);
 function squareToQuadrilateral(p1, p2, p3, p4) {
     var dx3 = p1.x - p2.x + p3.x - p4.x;
     var dy3 = p1.y - p2.y + p3.y - p4.y;
@@ -9669,7 +9655,7 @@ function extract(image, location) {
     var qToS = quadrilateralToSquare({ x: 3.5, y: 3.5 }, { x: location.dimension - 3.5, y: 3.5 }, { x: location.dimension - 6.5, y: location.dimension - 6.5 }, { x: 3.5, y: location.dimension - 3.5 });
     var sToQ = squareToQuadrilateral(location.topLeft, location.topRight, location.alignmentPattern, location.bottomLeft);
     var transform = times(sToQ, qToS);
-    var matrix = BitMatrix_1.BitMatrix.createEmpty(location.dimension, location.dimension);
+    var matrix = __WEBPACK_IMPORTED_MODULE_0__BitMatrix__["a" /* BitMatrix */].createEmpty(location.dimension, location.dimension);
     var mappingFunction = function (x, y) {
         var denominator = transform.a13 * x + transform.a23 * y + transform.a33;
         return {
@@ -9690,16 +9676,14 @@ function extract(image, location) {
         mappingFunction: mappingFunction,
     };
 }
-exports.extract = extract;
 
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["a"] = locate;
 var MAX_FINDERPATTERNS_TO_SEARCH = 4;
 var MIN_QUAD_RATIO = 0.5;
 var MAX_QUAD_RATIO = 1.5;
@@ -10055,7 +10039,6 @@ function locate(matrix) {
     }
     return result;
 }
-exports.locate = locate;
 function findAlignmentPattern(matrix, alignmentPatternQuads, topRight, topLeft, bottomLeft) {
     var _a;
     // Now that we've found the three finder patterns we can determine the blockSize and the size of the QR code.
